@@ -42,7 +42,7 @@ jobs:
         curl -X POST "$JENKINS_URL/job/$JENKINS_JOB_NAME/build" \
         --user "$JENKINS_USER:$JENKINS_API_TOKEN"
       env:
-        JENKINS_URL: ${{ "http://localhost:8080" }}
-        JENKINS_USER: ${{ "root" }}
-        JENKINS_API_TOKEN: ${{ "11c0e0ca1824515e43b68a75669d537893" }}
-        JENKINS_JOB_NAME: ${{"GitHub-Actions-CI-CD-pipeline-workflow-for-invoking-the-of-a-JavaapplicationJenkinsTomcatApache-" }}
+        JENKINS_URL: "http://localhost:8080"
+        JENKINS_USER: "root"
+        JENKINS_API_TOKEN: "11c0e0ca1824515e43b68a75669d537893"
+        JENKINS_JOB_NAME: "GitHub-Actions-CI-CD-pipeline-workflow-for-invoking-the-of-a-JavaapplicationJenkinsTomcatApache-"
