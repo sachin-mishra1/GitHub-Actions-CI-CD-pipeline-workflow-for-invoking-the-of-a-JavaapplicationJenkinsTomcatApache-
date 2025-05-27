@@ -1,0 +1,48 @@
+name: CI/CD Java to Jenkins + Tomcat
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Upload WAR Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-war
+        path: target/*.war
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download WAR Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: app-war
+
+    - name: Trigger Jenkins Deployment Job
+      run: |
+        curl -X POST "$JENKINS_URL/job/$JENKINS_JOB_NAME/build" \
+        --user "$JENKINS_USER:$JENKINS_API_TOKEN"
+      env:
+        JENKINS_URL: ${{ secrets.http://localhost:8080 }}
+        JENKINS_USER: ${{ secrets.root }}
+        JENKINS_API_TOKEN: ${{ secrets.11c0e0ca1824515e43b68a75669d537893 }}
+        JENKINS_JOB_NAME: ${{ secrets.GitHub-Actions-CI-CD-pipeline-workflow-for-invoking-the-of-a-JavaapplicationJenkinsTomcatApache- }}
