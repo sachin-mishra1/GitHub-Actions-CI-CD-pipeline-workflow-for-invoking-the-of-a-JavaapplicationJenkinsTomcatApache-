@@ -21,11 +21,12 @@ jobs:
     - name: Build with Maven
       run: mvn clean package
 
-    - name: Upload WAR Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: app-war
-        path: target/*.war
+    - - name: Upload artifact
+  uses: actions/upload-artifact@v3.1.3
+  with:
+    name: my-artifact
+    path: ./dist/
+
 
   deploy:
     needs: build
